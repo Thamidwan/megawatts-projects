@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://www.megawattdc.co.za/" />
 <meta property="og:locale" content="en_ZA" />
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cpath fill='%23252563' d='M8 94 46 10l16 34-10 8 12 4-30 38z'/%3E%3Cpath fill='%23252563' d='M60 94 90 26l30 68z'/%3E%3C/svg%3E" />
+<link rel="icon" type="image/png" href="assets/logo-mark.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -69,7 +69,7 @@
     --radius-sm:10px;
     --shadow:0 10px 30px rgba(37,37,99,.12);
     --shadow-sm:0 4px 14px rgba(37,37,99,.10);
-    --header-h:72px;
+    --header-h:84px;
   }
 
   *,*::before,*::after{box-sizing:border-box}
@@ -144,14 +144,9 @@
   .site-header.scrolled{box-shadow:0 6px 20px rgba(37,37,99,.10)}
   .header-inner{display:flex; align-items:center; gap:1rem; height:var(--header-h)}
 
-  .brand{display:flex; align-items:center; gap:.6rem; text-decoration:none; flex:none}
-  .brand .logo-mark{width:38px; height:32px; flex:none}
-  .brand .logo-mark .peak{fill:var(--navy-deep)}
-  .brand .logo-mark .bolt{fill:var(--white)}
-  .brand-text{font-family:var(--font-head); font-weight:800; font-size:1.18rem; letter-spacing:.01em; white-space:nowrap}
-  .brand-text .mega{color:var(--navy-deep)}
-  .brand-text .watt{color:var(--slate)}
-  .brand-sub{display:block; font-family:var(--font-accent); font-style:italic; font-weight:700; font-size:.72rem; color:var(--charcoal); line-height:1; margin-top:2px}
+  .brand{display:flex; align-items:center; text-decoration:none; flex:none}
+  .brand-logo{height:54px; width:auto; display:block}
+  @media (max-width: 480px){ .brand-logo{height:44px} }
 
   .nav{margin-left:auto; display:flex; align-items:center; gap:2.75rem}
   .nav-links{display:flex; gap:2.25rem; list-style:none; margin:0; padding:0}
@@ -226,9 +221,7 @@
     font-family:var(--font-accent); font-style:italic; font-weight:700;
     font-size:1.3rem; line-height:1.5; color:#fff; margin:0;
   }
-  .hero-quote .logo-mark{width:52px; height:44px; margin-bottom:1rem}
-  .hero-quote .logo-mark .peak{fill:#fff}
-  .hero-quote .logo-mark .bolt{fill:transparent}
+  .hero-quote img{width:auto; height:52px; margin-bottom:1rem}
 
   @media (max-width: 860px){
     .hero .wrap{grid-template-columns:1fr; gap:1.6rem; padding-block:14px clamp(28px, 7vw, 44px)}
@@ -407,10 +400,11 @@
   /* ===== Footer ===== */
   .site-footer{background:var(--navy); color:#fff}
   .footer-main{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:2rem; padding-block:clamp(40px,7vw,64px)}
-  .footer-main .brand .logo-mark .peak{fill:#fff}
-  .footer-main .brand .logo-mark .bolt{fill:transparent}
-  .footer-main .brand-text .mega,.footer-main .brand-text .watt{color:#fff}
-  .footer-main .brand-sub{color:rgba(255,255,255,.8)}
+  .footer-main .brand{align-self:start}
+  .footer-main .brand-logo{
+    height:64px; background:#fff; padding:12px 16px; border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,.18);
+  }
   .footer-col h4{font-size:.85rem; text-transform:uppercase; letter-spacing:.14em; color:var(--green-light); margin-bottom:1rem}
   .footer-col ul{list-style:none; margin:0; padding:0; display:grid; gap:.6rem}
   .footer-col a{color:rgba(255,255,255,.86); text-decoration:none; font-size:.95rem}
@@ -464,15 +458,7 @@
 <header class="site-header" id="top">
   <div class="wrap header-inner">
     <a class="brand" href="#top" aria-label="Megawatt Finance Solutions home">
-      <svg class="logo-mark" viewBox="0 0 120 100" aria-hidden="true">
-        <path class="peak" d="M6 96 46 8l17 36-11 8 13 5-32 39z"/>
-        <path class="peak" d="M58 96 90 24l30 72z"/>
-        <path class="bolt" d="M46 8 35 52h11l-9 40 17-42H52l11-8z"/>
-      </svg>
-      <span>
-        <span class="brand-text"><span class="mega">MEGA</span><span class="watt">WATT</span></span>
-        <span class="brand-sub">Finance Solutions</span>
-      </span>
+      <img class="brand-logo" src="assets/logo-lockup.png" width="413" height="288" alt="Megawatt Finance Solutions" />
     </a>
 
     <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
@@ -522,10 +508,7 @@
         </p>
       </div>
       <figure class="hero-quote">
-        <svg class="logo-mark" viewBox="0 0 120 100" aria-hidden="true">
-          <path class="peak" d="M6 96 46 8l17 36-11 8 13 5-32 39z"/>
-          <path class="peak" d="M58 96 90 24l30 72z"/>
-        </svg>
+        <img src="assets/logo-mark-white.png" width="176" height="173" alt="" />
         <p>&ldquo;Every step with Megawatt is a step upward and forward — out of debt review, toward a stronger financial position.&rdquo;</p>
       </figure>
     </div>
@@ -856,14 +839,7 @@
     <div class="footer-main">
       <div class="footer-about">
         <a class="brand" href="#top" aria-label="Megawatt Finance Solutions home">
-          <svg class="logo-mark" viewBox="0 0 120 100" aria-hidden="true">
-            <path class="peak" d="M6 96 46 8l17 36-11 8 13 5-32 39z"/>
-            <path class="peak" d="M58 96 90 24l30 72z"/>
-          </svg>
-          <span>
-            <span class="brand-text"><span class="mega">MEGA</span><span class="watt">WATT</span></span>
-            <span class="brand-sub">Finance Solutions</span>
-          </span>
+          <img class="brand-logo" src="assets/footer-logo.jpg" width="871" height="615" alt="Megawatt Finance Solutions" />
         </a>
         <p>Trusted debt specialists since 2019. We help qualifying South Africans exit debt review legally and move forward — <em>Better future with us</em>.</p>
       </div>
