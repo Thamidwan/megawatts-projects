@@ -69,7 +69,7 @@
     --radius-sm:10px;
     --shadow:0 10px 30px rgba(37,37,99,.12);
     --shadow-sm:0 4px 14px rgba(37,37,99,.10);
-    --header-h:84px;
+    --header-h:104px;
   }
 
   *,*::before,*::after{box-sizing:border-box}
@@ -145,8 +145,8 @@
   .header-inner{display:flex; align-items:center; gap:1rem; height:var(--header-h)}
 
   .brand{display:flex; align-items:center; text-decoration:none; flex:none}
-  .brand-logo{height:54px; width:auto; display:block}
-  @media (max-width: 480px){ .brand-logo{height:44px} }
+  .brand-logo{height:80px; width:auto; display:block}
+  @media (max-width: 480px){ .brand-logo{height:60px} }
 
   .nav{margin-left:auto; display:flex; align-items:center; gap:2.75rem}
   .nav-links{display:flex; gap:2.25rem; list-style:none; margin:0; padding:0}
@@ -198,12 +198,39 @@
     color:#fff; position:relative; overflow:hidden;
   }
   .hero::after{
-    content:""; position:absolute; right:-14%; top:-30%;
+    content:""; position:absolute; right:-14%; top:-30%; z-index:1;
     width:520px; height:520px; border-radius:50%;
     background:radial-gradient(circle at 30% 30%, rgba(88,193,77,.20), transparent 62%);
     pointer-events:none;
   }
-  .hero .wrap{position:relative; z-index:1; display:grid; gap:2.5rem; grid-template-columns:1.15fr .85fr; align-items:center; padding-block:clamp(16px, 2.5vw, 28px) clamp(32px, 5vw, 56px)}
+
+  /* Sliding background photos */
+  .hero-slideshow{position:absolute; inset:0; z-index:0; overflow:hidden}
+  .hero-slide{
+    position:absolute; inset:0;
+    background-size:cover; background-position:center 28%;
+    opacity:0;
+    animation:heroSlide 42s linear infinite;
+    animation-delay:calc((var(--i) - 1) * 7s);
+    will-change:opacity, transform;
+  }
+  .hero-slideshow::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(160deg, rgba(18,18,54,.82) 0%, rgba(11,11,38,.90) 100%);
+  }
+  @keyframes heroSlide{
+    0%     {opacity:0; transform:translateX(4%)  scale(1.01)}
+    2.4%   {opacity:1; transform:translateX(0)   scale(1.01)}
+    14.3%  {opacity:1; transform:translateX(0)   scale(1.04)}
+    16.7%  {opacity:0; transform:translateX(-4%) scale(1.04)}
+    100%   {opacity:0; transform:translateX(-4%) scale(1.04)}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-slide{animation:none; transition:opacity .4s ease}
+    .hero-slide:first-child{opacity:1; transform:none}
+  }
+
+  .hero .wrap{position:relative; z-index:1; display:grid; gap:2.5rem; grid-template-columns:1.15fr .85fr; align-items:center; min-height:min(72vh, 620px); padding-block:clamp(28px, 4vw, 56px)}
   .hero h1{color:#fff}
   .hero .value{font-size:1.18rem; color:rgba(255,255,255,.92); max-width:52ch; margin-bottom:1.6rem}
   .hero-cta{display:flex; flex-wrap:wrap; gap:.9rem; margin-bottom:1.4rem}
@@ -242,6 +269,11 @@
   @media (max-width: 480px){ .trust .wrap{grid-template-columns:1fr} }
 
   /* ===== About ===== */
+  .about-photo{
+    display:block; width:100%; max-width:560px; height:auto;
+    border-radius:var(--radius); margin:1.6rem auto 2.6rem;
+    box-shadow:0 14px 36px rgba(37,37,99,.16);
+  }
   .about-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:2.5rem; align-items:start}
   .about-card{
     background:#fff; border:1px solid var(--neutral); border-radius:var(--radius);
@@ -490,6 +522,14 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="home" aria-labelledby="hero-title">
+    <div class="hero-slideshow" aria-hidden="true">
+      <div class="hero-slide" style="--i:1; background-image:url('assets/hero-1.png')"></div>
+      <div class="hero-slide" style="--i:2; background-image:url('assets/hero-2.png')"></div>
+      <div class="hero-slide" style="--i:3; background-image:url('assets/hero-3.png')"></div>
+      <div class="hero-slide" style="--i:4; background-image:url('assets/hero-4.png')"></div>
+      <div class="hero-slide" style="--i:5; background-image:url('assets/hero-5.png')"></div>
+      <div class="hero-slide" style="--i:6; background-image:url('assets/hero-6.png')"></div>
+    </div>
     <div class="wrap">
       <div>
         <p class="eyebrow">Trusted Debt Specialists Since 2019</p>
@@ -541,6 +581,8 @@
     <div class="wrap">
       <p class="eyebrow">Why Megawatt</p>
       <h2 id="about-title">A legal exit route — not another year stuck in debt review</h2>
+      <img class="about-photo" src="assets/hero-6.png" width="1360" height="1360" loading="lazy"
+           alt="A Megawatt debt counsellor talking with a smiling couple during a consultation" />
       <div class="about-grid">
         <div>
           <p class="lead">Megawatt Finance Solutions is a Polokwane-based debt counselling and debt review company. Many South Africans remain stuck under debt review even after their finances improve.</p>
