@@ -269,10 +269,26 @@
   @media (max-width: 480px){ .trust .wrap{grid-template-columns:1fr} }
 
   /* ===== About ===== */
-  .about-photo{
-    display:block; width:100%; max-width:560px; height:auto;
-    border-radius:var(--radius); margin:1.6rem auto 2.6rem;
-    box-shadow:0 14px 36px rgba(37,37,99,.16);
+  .about-slider{
+    position:relative; width:100%; max-width:560px; aspect-ratio:1/1;
+    margin:1.6rem auto 2.6rem; overflow:hidden;
+    border-radius:var(--radius); box-shadow:0 14px 36px rgba(37,37,99,.16);
+  }
+  .about-slide{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    opacity:0; animation:aboutSlide 10s ease-in-out infinite;
+  }
+  .about-slide:nth-child(2){animation-delay:5s}
+  @keyframes aboutSlide{
+    0%      {opacity:1; transform:translateX(0)}
+    42.8%   {opacity:1; transform:translateX(0)}
+    50%     {opacity:0; transform:translateX(-3%)}
+    92.8%   {opacity:0; transform:translateX(3%)}
+    100%    {opacity:1; transform:translateX(0)}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .about-slide{animation:none}
+    .about-slide:first-child{opacity:1}
   }
   .about-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:2.5rem; align-items:start}
   .about-card{
@@ -581,8 +597,12 @@
     <div class="wrap">
       <p class="eyebrow">Why Megawatt</p>
       <h2 id="about-title">A legal exit route — not another year stuck in debt review</h2>
-      <img class="about-photo" src="assets/hero-6.png" width="1360" height="1360" loading="lazy"
-           alt="A Megawatt debt counsellor talking with a smiling couple during a consultation" />
+      <div class="about-slider" role="img" aria-label="Megawatt consultations and clients moving forward">
+        <img class="about-slide" src="assets/hero-6.png" width="1360" height="1360" loading="lazy"
+             alt="A Megawatt debt counsellor talking with a smiling couple during a consultation" />
+        <img class="about-slide" src="assets/hero-1.png" width="1360" height="1360" loading="lazy"
+             alt="A couple celebrating good news while reviewing a document at home" />
+      </div>
       <div class="about-grid">
         <div>
           <p class="lead">Megawatt Finance Solutions is a Polokwane-based debt counselling and debt review company. Many South Africans remain stuck under debt review even after their finances improve.</p>
